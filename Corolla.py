@@ -3,23 +3,33 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
-data = pd.read_csv(r'c:\Users\scman\Downloads\ToyotaCorolla.csv')
-
-
+st.set_page_config(layout="wide")
 st.title('USED TOYOTA COROLLA PRICES')
 st.subheader('RAW DATA')
-st.write(data)
+st.image('Toyota.jpg')
+
+data=pd.read_csv('ToyotaCorolla2.csv')
+del data['Unnamed: 0']
+del data['Unnamed: 0.1']
+
+edited=st.data_editor(data)
+
 
 models=data['Model'].unique
 
-st.image('Toyota.jpg')
-
 sales1=data[['Model','Mfg_Year','Price']]
 
-fig=px.scatter(sales1,x='Mfg_Year',y='Price',color='Model')
-st.write(fig)
+fig=px.scatter(data,x='Fuel_Type',y='HP', color='Price')
+st.subheader('Scatter Chart of Fuel Type vs Hoersepower of Vehicles')
+st.plotly_chart(fig)
 
 sales2=data[['Fuel_Type','Mfg_Year','Price']]
 
-fig2=px.scatter_3d(sales2,x='Mfg_Year',y='Price',z='Fuel_Type',color='Price')
-st.write(fig2)
+fig2=px.bar(data,x='Mfg_Year',y='Price',color='Fuel_Type', barmode='group')
+st.subheader('Turnover of Sales by Fuel Type USD')
+st.plotly_chart(fig2)
+
+fig3=px.histogram(data,x='Price',color='Mfg_Year')
+st.subheader('Histogram of Vehicle Price')
+st.write('This shows the most common price points along with the manufacturing year of the vehicles')
+st.plotly_chart(fig3)
