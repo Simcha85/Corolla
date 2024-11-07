@@ -4,8 +4,8 @@ import plotly.express as px
 import numpy as np
 
 st.set_page_config(layout="wide")
-st.title('USED TOYOTA COROLLA PRICES')
-st.subheader('RAW DATA')
+st.title('USED TOYOTA COROLLA PRICES 1998-2004')
+st.subheader('Sales Data')
 st.image('Toyota.jpg')
 
 data=pd.read_csv('ToyotaCorolla2.csv')
